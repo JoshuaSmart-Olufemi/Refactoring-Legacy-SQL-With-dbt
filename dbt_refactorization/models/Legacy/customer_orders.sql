@@ -6,20 +6,20 @@ WITH paid_orders as (select Orders.ID as order_id,
     p.payment_finalized_date,
     C.FIRST_NAME    as customer_first_name,
         C.LAST_NAME as customer_last_name
-FROM dbt_josh_smart.jaffle_shop_orders as Orders
+FROM dbt.dbt_josh_smart.jaffle_shop_orders as Orders
 left join (select order_id as order_id, max(created) as payment_finalized_date, sum(amount) / 100.0 as total_amount_paid
-        from dbt_josh_smart.stripe_payments
+        from dbt.dbt_josh_smart.stripe_payments
         where STATUS <> 'fail'
         group by 1) p ON orders.id = p.order_id
-left join dbt_josh_smart.jaffle_shop_customers C on orders.user_id = C.id ),
+left join dbt.dbt_josh_smart.jaffle_shop_customers C on orders.user_id = C.id ),
 
 customer_orders 
 as (select C.ID as customer_id
     , min(ORDER_DATE) as first_order_date
     , max(ORDER_DATE) as most_recent_order_date
     , count(ORDERS.ID) AS number_of_orders
-from dbt_josh_smart.jaffle_shop_customers C 
-left join dbt_josh_smart.jaffle_shop_orders as Orders
+from dbt.dbt_josh_smart.jaffle_shop_customers C 
+left join dbt.dbt_josh_smart.jaffle_shop_orders as Orders
 on orders.USER_ID = C.ID 
 group by 1)
 
@@ -44,4 +44,4 @@ LEFT OUTER JOIN
     group by 1
     order by p.order_id
 ) x on x.order_id = p.order_id
-ORDER BY order_id
+ORDER BY order_id 
