@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: dbt_josh_smart
+    tables:
+      - name: customer_orders
+      - name: jaffle_shop_customers
+      - name: jaffle_shop_orders
+      - name: my_first_dbt_model
+      - name: my_second_dbt_model
+      - name: stripe_payments
