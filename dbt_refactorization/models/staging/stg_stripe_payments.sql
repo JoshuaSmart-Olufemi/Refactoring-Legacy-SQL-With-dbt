@@ -6,7 +6,7 @@ with payments as (
     max(created) as payment_finalized_date, 
     sum(amount) / 100.0 as total_amount_paid
     from {{ source('dbt_josh_smart','stripe_payments') }}
-    where STATUS <> 'fail'
+    where status <> 'fail'
     group by 1
 
 )
