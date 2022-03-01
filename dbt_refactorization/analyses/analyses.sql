@@ -10,7 +10,7 @@
     a_query=old_etl_relation_query,
     b_query=new_etl_relation_query,
     primary_key="order_id",
-    column_to_compare="order_id"
+    column_to_compare="customer_id"
 ) %}
 
 {% set audit_results = run_query(audit_query) %}
