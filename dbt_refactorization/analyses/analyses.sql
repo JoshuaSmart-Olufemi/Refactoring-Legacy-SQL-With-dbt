@@ -1,6 +1,5 @@
 {% set old_etl_relation_query %}
     select * from dbt_josh_smart.customer_orders
-    where is_latest
 {% endset %}
 
 {% set new_etl_relation_query %}
